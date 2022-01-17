@@ -5,12 +5,12 @@ start:
         - uses: actions/checkout@v2
 
         - name: AWS SSM Send Command
-        uses: aws-actions/aws-ssm-send-command@1.0.1
+        uses: aws-actions/configure-aws-credentials@v1
         with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID  }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY  }}
         aws-region: us-east-1
-        instance-ids: ${{ secrets.INSTANCE_ID  }}
+        instance-ids: ${{secrets.INSTANCE_ID}}
         comment: Deploy the master branch
         working-directory: /home/ubuntu/django_app
         command: /bin/sh ./deploy.sh
