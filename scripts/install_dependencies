@@ -1,1 +1,61 @@
 
+#!/bin/bash
+sudo apt update
+sudo apt -y upgrade
+
+# Destination folder
+cd /home/ubuntu
+# AWS CLI needed to get parameters
+sudo apt install -y awscli
+
+# Installing NGINX
+sudo apt install -y nginx
+sudo touch /etc/nginx/sites-enabled/project.conf
+
+# Change domain here!
+sudo cat <<EOT > /etc/nginx/sites-enabled/project.conf
+server {
+  set \$my_host \$host;
+  if (\$host ~ "\d+\.\d+\.\d+\.\d+") {
+      set \$my_host "donate-anything.org";
+  }
+  client_max_body_size 2G;
+  server_name donate-anything.org www.donate-anything.org;
+  keepalive_timeout 5;
+  location / {
+    proxy_pass http://127.0.0.1:5000;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto \$scheme;
+    proxy_set_header Host \$my_host;
+    # we don't want nginx trying to do something clever with
+    # redirects, we set the Host: header above already.
+    proxy_redirect off;
+    ## The following is only needed for async frameworks:
+    ## NGINX example https://www.nginx.com/blog/websocket-nginx/
+    ## To turn off buffering, you only need to add `proxy_buffering off;`
+    # proxy_set_header Upgrade \$http_upgrade;
+    # proxy_set_header Connection 'upgrade';
+    ## 25 minutes of no data closes connection
+    # proxy_read_timeout 1500s;
+  }
+}
+EOT
+sudo service nginx restart
+
+# Installing Python and Preparing My Webserver
+sudo apt-get install python-pip python-dev python-venv
+sudo apt install -y software-properties-common
+python -m ensurepip --default-pip --user
+
+# Installing git
+sudo apt-get install git
+git clone https://github.com/Coder-Vishali/django_app.git
+
+# My dependencies
+sudo apt install -y build-essential libpq-dev gettext
+python -m venv myvenv
+source myvenv/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+pip install django bcrypt django-extensions
+pip install gunicorn
