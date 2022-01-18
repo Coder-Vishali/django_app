@@ -1,0 +1,23 @@
+#!/bin/bash
+
+cd /home/ubuntu
+
+# CHANGE THIS PREFIX TO YOUR PARAMETER STORE PREFIX!!!!!!!!!
+# We're doing everything by path (i.e. glob) so make sure you have
+# the slash at the beginning and end of the prefix!
+PARAMETER_STORE_PREFIX="/DONATE_ANYTHING/"
+
+# Storing all secrets in a .env.json file in the root directory. I've implemented
+# a wrapper around django-environ to read in JSON files as well in config/settings/base.py
+# -------------------------------------------------------------------------------------
+# Grabbing our environment variables from Parameter Store and storing it in a JSON file
+echo $(aws ssm get-parameters-by-path --with-decryption --region us-east-2 \
+--path "${PARAMETER_STORE_PREFIX}") > /home/ubuntu/.env.json
+
+# -------------------------------------------------------------------------------------
+
+# This is Django specific. This is where you'll need to replace
+# things if you're not using Django 
+
+source myvenv/bin/activate
+export DJANGO_SETTINGS_MODULE="config.settings.django_app"
