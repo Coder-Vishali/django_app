@@ -56,6 +56,7 @@ sudo apt install -y build-essential libpq-dev gettext
 python3 -m venv myvenv
 source myvenv/bin/activate
 pip3 install --upgrade pip setuptools wheel
+pip3 install config
 pip3 install -r requirements.txt
 pip3 install django bcrypt django-extensions
 pip3 install gunicorn
