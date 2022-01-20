@@ -19,7 +19,7 @@ jobs:
 # configuration of running a linter and testing framework. Adjust this section to how
 # you've been running tests. Changes end at the next, huge dashed line
 
-  linter:
+  python_setup:
     runs-on: ubuntu-latest
     steps:
 
@@ -32,7 +32,7 @@ jobs:
           python-version: 3.9
 
   # With no caching at all the entire ci process takes 4m 30s to complete!
-  pytest:
+  build:
     runs-on: ubuntu-latest
     steps:
 
