@@ -6,7 +6,7 @@ cd /home/ubuntu/django_app
 # a wrapper around django-environ to read in JSON files as well in config/settings/base.py
 # -------------------------------------------------------------------------------------
 # Grabbing our environment variables from Parameter Store and storing it in a JSON file
-# echo $(aws ssm get-parameters-by-path --with-decryption --region us-east-2 --path "/site/newyork/department/") > /home/ubuntu/.env.json
+echo $(aws ssm get-parameters-by-path --with-decryption --region us-east-2 --path "/site/newyork/department/") > /home/ubuntu/.env.json
 
 # -------------------------------------------------------------------------------------
 
