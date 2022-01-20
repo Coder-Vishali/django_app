@@ -15,10 +15,10 @@ cd /home/ubuntu/django_app
 
 source myvenv/bin/activate
 export DJANGO_SETTINGS_MODULE="django_app.settings"
+export PYTHONPATH='/home/ubuntu/django_app/django_app'
 
 # The following is Django oriented where I'm starting my HTTP server. If you're using a
 # different web framework, understand that my port is on 8000 so that NGINX, the reverse
 # proxy, can handle all the requests.
 # How many workers? https://docs.gunicorn.org/en/stable/design.html#how-many-workers
-export PYTHONPATH='/home/ubuntu/django_app/django_app'
 gunicorn --bind 0.0.0.0:8000 django_app.wsgi:application
