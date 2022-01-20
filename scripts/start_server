@@ -16,7 +16,7 @@ echo $(aws ssm get-parameters-by-path --with-decryption --region us-east-2 --pat
 source myvenv/bin/activate
 export DJANGO_SETTINGS_MODULE="django_app.settings"
 
-export PYTHONPATH='/home/ubuntu/django_app/django_app'
+export PYTHONPATH='/home/ubuntu/django_app'
 
 # The following is Django oriented where I'm starting my HTTP server. If you're using a
 # different web framework, understand that my port is on 8000 so that NGINX, the reverse
