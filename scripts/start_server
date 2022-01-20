@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/ubuntu/django_app
+cd /home/ubuntu
 
 # Storing all secrets in a .env.json file in the root directory. I've implemented
 # a wrapper around django-environ to read in JSON files as well in config/settings/base.py
