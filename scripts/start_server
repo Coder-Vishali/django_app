@@ -14,8 +14,7 @@ cd /home/ubuntu
 # things if you're not using Django 
 
 source myvenv/bin/activate
-export DJANGO_SETTINGS_MODULE="django_app.settings"
-# export PYTHONPATH='/home/ubuntu/django_app/django_app'
+export DJANGO_SETTINGS_MODULE="django_app.django_app.settings"
 
 # The following is Django oriented where I'm starting my HTTP server. If you're using a
 # different web framework, understand that my port is on 8000 so that NGINX, the reverse
